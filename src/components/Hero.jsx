@@ -1,6 +1,6 @@
 import { motion, useAnimation } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import heroImage from '../assets/images/hero.jpg'
+import heroImage from '../assets/images/hero.webp'
 
 export default function Hero() {
   const controls = useAnimation()
