@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function RSVPForm() {
   const [showPerson2, setShowPerson2] = useState(false)
@@ -50,19 +51,94 @@ export default function RSVPForm() {
     }
   }
 
+  // Animation variants for form sections
+  const person2Variants = {
+    hidden: {
+      opacity: 0,
+      height: 0,
+      y: -20,
+      transition: {
+        height: {
+          duration: 0.3
+        },
+        opacity: {
+          duration: 0.2
+        }
+      }
+    },
+    visible: {
+      opacity: 1,
+      height: 'auto',
+      y: 0,
+      transition: {
+        height: {
+          duration: 0.3,
+          ease: "easeOut"
+        },
+        opacity: {
+          duration: 0.3,
+          delay: 0.1
+        },
+        y: {
+          duration: 0.3
+        }
+      }
+    },
+    exit: {
+      opacity: 0,
+      height: 0,
+      y: -20,
+      transition: {
+        height: {
+          duration: 0.3
+        },
+        opacity: {
+          duration: 0.2
+        }
+      }
+    }
+  }
+
+  const inputFocusVariants = {
+    rest: { scale: 1 },
+    focus: {
+      scale: 1.01,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    }
+  }
+
   return (
     <section className="bg-white py-20 px-8">
       <div className="text-center mb-16">
-        <p className="font-sans text-xs md:text-sm leading-loose text-gray-700 font-light max-w-2xl mx-auto">
+        <motion.p
+          className="font-sans text-xs md:text-sm leading-loose text-gray-700 font-light max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Molimo vas da svoj dolazak ili izostanak potvrdite najkasnije do<br />
           1. veljače 2026. Unaprijed vam zahvaljujemo i radujemo se što<br />
           ćete s nama podijeliti ovaj poseban dan!
-        </p>
+        </motion.p>
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+      <motion.form
+        onSubmit={handleSubmit}
+        className="max-w-2xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
         {/* First Name */}
-        <div className="mb-10">
+        <motion.div
+          className="mb-10"
+          variants={inputFocusVariants}
+          initial="rest"
+          whileFocus="focus"
+        >
           <input
             type="text"
             name="firstName"
@@ -72,10 +148,15 @@ export default function RSVPForm() {
             required
             className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
           />
-        </div>
+        </motion.div>
 
         {/* Last Name */}
-        <div className="mb-10">
+        <motion.div
+          className="mb-10"
+          variants={inputFocusVariants}
+          initial="rest"
+          whileFocus="focus"
+        >
           <input
             type="text"
             name="lastName"
@@ -85,10 +166,15 @@ export default function RSVPForm() {
             required
             className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
           />
-        </div>
+        </motion.div>
 
         {/* Phone */}
-        <div className="mb-10">
+        <motion.div
+          className="mb-10"
+          variants={inputFocusVariants}
+          initial="rest"
+          whileFocus="focus"
+        >
           <input
             type="tel"
             name="phone"
@@ -99,18 +185,25 @@ export default function RSVPForm() {
             className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
           />
           <p className="text-xs text-gray-400 mt-2 tracking-wider">za kontakt</p>
-        </div>
+        </motion.div>
 
         {/* Attendance Question */}
-        <div className="mb-10 text-center">
+        <motion.div
+          className="mb-10 text-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+        >
           <label className="block font-sans text-xs text-gray-700 mb-4 tracking-[2px]">
             DOLAZITE LI NA NAŠE VJENČANJE?
           </label>
-          <div className="font-sans text-lg tracking-[4px] text-gray-800 mb-6">
-            DA / NE
-          </div>
+
           <div className="flex justify-center gap-12">
-            <label className="flex items-center gap-3 cursor-pointer group">
+            <motion.label
+              className="flex items-center gap-3 cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
               <input
                 type="radio"
                 name="attending"
@@ -121,8 +214,12 @@ export default function RSVPForm() {
                 className="w-4 h-4 cursor-pointer accent-gray-600"
               />
               <span className="font-sans text-sm tracking-wider">DA</span>
-            </label>
-            <label className="flex items-center gap-3 cursor-pointer group">
+            </motion.label>
+            <motion.label
+              className="flex items-center gap-3 cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
               <input
                 type="radio"
                 name="attending"
@@ -133,59 +230,104 @@ export default function RSVPForm() {
                 className="w-4 h-4 cursor-pointer accent-gray-600"
               />
               <span className="font-sans text-sm tracking-wider">NE</span>
-            </label>
+            </motion.label>
           </div>
-        </div>
+        </motion.div>
 
         {/* Add Person 2 Button */}
         {!showPerson2 && (
-          <button
+          <motion.button
             type="button"
             onClick={() => setShowPerson2(true)}
-            className="w-full py-4 px-6 font-sans text-sm font-medium uppercase tracking-[2px] transition-all duration-300 shadow-md hover:shadow-lg my-10"
+            className="w-full py-4 px-6 font-sans text-sm font-medium uppercase tracking-[2px] shadow-md hover:shadow-lg my-10 transition-shadow duration-200"
             style={{
               backgroundColor: '#c8d5d0',
               color: '#ffffff',
               letterSpacing: '2px'
             }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = '#b8c9c3'}
-            onMouseLeave={(e) => e.target.style.backgroundColor = '#c8d5d0'}
+            whileHover={{
+              scale: 1.02,
+              backgroundColor: '#b8c9c3'
+            }}
+            whileTap={{
+              scale: 0.98
+            }}
+            transition={{
+              duration: 0.2,
+              ease: "easeInOut"
+            }}
           >
             + Dodaj još jednu osobu
-          </button>
+          </motion.button>
         )}
 
         {/* Person 2 Section */}
-        {showPerson2 && (
-          <div className="bg-gray-50 border border-gray-200 p-8 my-10">
-            <h3 className="font-sans text-sm font-normal text-gray-800 mb-6 uppercase tracking-[2px]">
-              Osoba 2
-            </h3>
-            <div className="mb-8">
-              <input
-                type="text"
-                name="person2.firstName"
-                placeholder="IME"
-                value={formData.person2.firstName}
-                onChange={handleInputChange}
-                className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="person2.lastName"
-                placeholder="PREZIME"
-                value={formData.person2.lastName}
-                onChange={handleInputChange}
-                className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
-              />
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {showPerson2 && (
+            <motion.div
+              className="bg-gray-50 border border-gray-200 p-8 my-10 overflow-hidden"
+              variants={person2Variants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="font-sans text-sm font-normal text-gray-800 uppercase tracking-[2px]">
+                  Osoba 2
+                </h3>
+                <motion.button
+                  type="button"
+                  onClick={() => setShowPerson2(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </motion.button>
+              </div>
+              <motion.div
+                className="mb-8"
+                variants={inputFocusVariants}
+                initial="rest"
+                whileFocus="focus"
+              >
+                <input
+                  type="text"
+                  name="person2.firstName"
+                  placeholder="IME"
+                  value={formData.person2.firstName}
+                  onChange={handleInputChange}
+                  className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
+                />
+              </motion.div>
+              <motion.div
+                variants={inputFocusVariants}
+                initial="rest"
+                whileFocus="focus"
+              >
+                <input
+                  type="text"
+                  name="person2.lastName"
+                  placeholder="PREZIME"
+                  value={formData.person2.lastName}
+                  onChange={handleInputChange}
+                  className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent font-sans text-sm tracking-[2px] placeholder-gray-400 transition-colors duration-300"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Message */}
-        <div className="mb-10">
+        <motion.div
+          className="mb-10"
+          variants={inputFocusVariants}
+          initial="rest"
+          whileFocus="focus"
+        >
           <label className="block font-sans text-xs text-gray-700 mb-4 uppercase tracking-[2px]">
             Poruka (neobavezno)
           </label>
@@ -197,23 +339,32 @@ export default function RSVPForm() {
             rows="4"
             className="w-full px-0 py-3 border-0 border-b-[1px] border-gray-300 focus:outline-none focus:border-gray-600 bg-transparent resize-none font-sans text-sm placeholder-gray-400 transition-colors duration-300"
           />
-        </div>
+        </motion.div>
 
         {/* Submit Button */}
-        <button
+        <motion.button
           type="submit"
-          className="w-full py-5 px-8 font-sans text-sm font-medium uppercase tracking-[3px] transition-all duration-300 shadow-lg hover:shadow-xl mt-8"
+          className="w-full py-5 px-8 font-sans text-sm font-medium uppercase tracking-[3px] shadow-lg hover:shadow-xl mt-8 transition-shadow duration-200"
           style={{
             backgroundColor: '#c8d5d0',
             color: '#ffffff',
             letterSpacing: '3px'
           }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = '#b8c9c3'}
-          onMouseLeave={(e) => e.target.style.backgroundColor = '#c8d5d0'}
+          whileHover={{
+            scale: 1.02,
+            backgroundColor: '#b8c9c3'
+          }}
+          whileTap={{
+            scale: 0.98
+          }}
+          transition={{
+            duration: 0.2,
+            ease: "easeInOut"
+          }}
         >
           Pošalji prijavu
-        </button>
-      </form>
+        </motion.button>
+      </motion.form>
     </section>
   )
 }

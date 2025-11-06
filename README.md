@@ -1,21 +1,23 @@
 # Wedding Landing Page
 
-A beautiful and elegant wedding invitation landing page built with React and Tailwind CSS.
+A beautiful and elegant wedding invitation landing page built with React, Tailwind CSS, and Framer Motion.
 
 ## Features
 
-- 🎨 Beautiful hero section with custom wedding photography
-- ⏱️ Live countdown timer to wedding day
+- 🎨 Beautiful hero section with custom wedding photography and flipping text animation
+- ⏱️ Live countdown timer with smooth number transitions
 - 📅 Wedding day schedule timeline
-- 📝 RSVP form with toast notifications
-- 🖼️ Auto-rotating image carousel
-- 📱 Fully responsive design
+- 📝 RSVP form with elegant animations and toast notifications
+- 🖼️ Auto-rotating image carousel with swipe support
+- 📱 Fully responsive design with mobile-optimized carousel
+- ✨ Smooth animations powered by Framer Motion
 
 ## Tech Stack
 
 - React 19
 - Vite
 - Tailwind CSS 3
+- Framer Motion (Animations)
 - Sonner (Toast notifications)
 
 ## Quick Start
@@ -46,6 +48,31 @@ The `_redirects` file is already configured for SPA routing.
 - **Hero Image**: Replace `src/assets/images/hero.jpg`
 - **Schedule Events**: Edit `src/components/Schedule.jsx`
 
+## Key Features Details
+
+### Hero Section
+- Flipping text animation on page load
+- Continuous floating animation for couple names
+- Responsive typography scaling
+
+### Image Carousel
+- 3-image layout on desktop (center focused with side previews)
+- Mobile-optimized with 20% peek of adjacent images
+- Touch/swipe navigation support
+- Auto-rotation every 5 seconds
+- Smooth transitions with no white flash
+
+### RSVP Form
+- Multi-person support
+- Real-time form validation
+- Animated form sections
+- Success notifications with Sonner
+
+### Countdown Timer
+- Real-time updates every second
+- Smooth number transitions
+- Days, hours, minutes, and seconds display
+
 ---
 
-Made with ♥ and Smatik Group
+Built with modern web technologies for a seamless wedding invitation experience.
