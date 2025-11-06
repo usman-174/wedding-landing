@@ -5,14 +5,15 @@ export default function Carousel() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
+  // Optimized images with appropriate sizing and quality
   const carouselImages = [
-    'https://images.unsplash.com/photo-1464207687429-7505649dae38?q=80&w=2073',
-    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=2070',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069',
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070',
-    'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2070',
-    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=2069',
-    'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070'
+    'https://images.unsplash.com/photo-1464207687429-7505649dae38?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1606800052052-a08af7148866?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=75&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519741497674-611481863552?q=75&w=1200&auto=format&fit=crop'
   ]
 
   useEffect(() => {
@@ -123,6 +124,7 @@ export default function Carousel() {
             <motion.img
               src={carouselImages[getPrevIndex()]}
               alt="Previous"
+              loading="lazy"
               className="w-full h-full object-cover rounded-lg md:rounded-xl transform translate-x-[30%] md:translate-x-0"
               style={{ filter: 'brightness(0.6) contrast(0.9)' }}
               whileHover={{ filter: { md: 'brightness(0.85)' } }}
@@ -201,6 +203,7 @@ export default function Carousel() {
             <motion.img
               src={carouselImages[getNextIndex()]}
               alt="Next"
+              loading="lazy"
               className="w-full h-full object-cover rounded-lg md:rounded-xl transform -translate-x-[30%] md:translate-x-0"
               style={{ filter: 'brightness(0.6) contrast(0.9)' }}
               whileHover={{ filter: { md: 'brightness(0.85)' } }}
