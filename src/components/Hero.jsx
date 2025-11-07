@@ -48,7 +48,9 @@ export default function Hero() {
     { y: [0, -3, 0], duration: 4.3 },
     { y: [0, -5, 0], duration: 3.7 },
     { y: [0, -3, 0], duration: 4.1 },
-    { y: [0, -4, 0], duration: 3.8 }
+    { y: [0, -4, 0], duration: 3.8 },
+    { y: [0, -5, 0], duration: 3.6 },
+    { y: [0, -3, 0], duration: 4.2 }
   ]
 
   // Date flipping animation
@@ -73,15 +75,17 @@ export default function Hero() {
   }
 
   const nameLetters = [
-    { letter: 'V', delay: 0 },
-    { letter: 'i', delay: 0.05 },
-    { letter: 't', delay: 0.1 },
-    { letter: '&', isAmpersand: true, delay: 0.15 },
-    { letter: 'J', delay: 0.2 },
-    { letter: 'o', delay: 0.25 },
-    { letter: 's', delay: 0.3 },
-    { letter: 'i', delay: 0.35 },
-    { letter: 'p', delay: 0.4 }
+    { letter: 'A', delay: 0 },
+    { letter: 'n', delay: 0.05 },
+    { letter: 'i', delay: 0.1 },
+    { letter: 'c', delay: 0.15 },
+    { letter: 'a', delay: 0.2 },
+    { letter: '&', isAmpersand: true, delay: 0.25 },
+    { letter: 'J', delay: 0.3 },
+    { letter: 'o', delay: 0.35 },
+    { letter: 's', delay: 0.4 },
+    { letter: 'i', delay: 0.45 },
+    { letter: 'p', delay: 0.5 }
   ]
 
   // Start floating animation after flip completes
@@ -94,16 +98,16 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-end justify-center overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${heroImage})`
         }}
       />
-      <div className="relative z-10 text-center text-white px-8">
+      <div className="relative z-10 text-center text-white px-8 pb-16 md:pb-20">
         <motion.p
-          className="font-serif text-xl md:text-3xl font-light tracking-[3px] mb-3"
+          className="font-serif text-xl md:text-3xl font-light tracking-[3px] mt-auto"
           initial="hidden"
           animate="visible"
           variants={dateVariants}
@@ -113,7 +117,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.h1
-          className="font-serif text-6xl md:text-8xl lg:text-9xl font-light tracking-[5px]"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl font-light tracking-[5px] mt-auto"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
